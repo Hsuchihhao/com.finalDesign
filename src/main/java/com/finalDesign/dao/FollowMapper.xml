@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalDesign.dao.FollowMapper">
+
+    <!--添加关注-->
+    <insert id="addFollow" parameterType="Follow">
+        insert into finaldesign.follow(followEssay, followName, followCategory)
+        VALUES (#{followEssay}, #{followName}, #{followCategory})
+    </insert>
+
+    <!--删除关注-->
+    <delete id="deleteFollowByName" parameterType="Follow" >
+        delete from finaldesign.follow where followName =#{followName} and followEssay=#{followEssay}
+    </delete>
+    
+    <select id="queryFollowByNameAndEssay" parameterType="Follow" resultType="Follow">
+        select * from finaldesign.follow where followName =#{followName} and followEssay=#{followEssay}
+    </select>
+
+    <select id="queryFollowByName" resultType="Follow">
+        select * from finaldesign.follow where followName=#{followName}
+    </select>
+</mapper>

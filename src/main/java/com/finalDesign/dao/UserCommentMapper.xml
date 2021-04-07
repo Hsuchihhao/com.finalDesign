@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.finalDesign.dao.UserCommentMapper">
+    <!--插入评论-->
+    <insert id="addUserComment" parameterType="UserComment">
+        insert into finaldesign.usercomment(commentDisplayName, commentDate, commentText, commentEssay)
+            VALUES (#{commentDisplayName},#{commentDate},#{commentText},#{commentEssay})
+    </insert>
+    <select id="queryUserCommentByEssay" resultType="UserComment">
+        select * from finaldesign.usercomment where commentEssay =#{commentEssay}
+    </select>
+</mapper>

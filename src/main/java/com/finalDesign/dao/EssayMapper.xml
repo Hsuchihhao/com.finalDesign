@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalDesign.dao.EssayMapper">
+
+    <insert id="addEssay" parameterType="Essay">
+
+        insert into finaldesign.essay (essayName, essayText, essayUserDisplayName,essayCategory,essayCreateTime)
+        values (#{essayName}, #{essayText}, #{essayUserDisplayName}, #{essayCategory}, #{essayCreateTime});
+    </insert>
+
+    <delete id="deleteEssayById" parameterType="int">
+        delete
+        from finaldesign.essay
+        where essayId = #{essayId}
+
+    </delete>
+
+    <update id="updateEssay" parameterType="Essay">
+        update finaldesign.essay
+        set essayName=#{essayName},
+            essayText=#{essayText},
+            essayUserDisplayName=#{essayUserDisplayName},
+            essayCategory=#{essayCategory}
+        where essayId = #{essayId};
+    </update>
+
+    <select id="queryEssayById" resultType="Essay">
+        select *
+        from finaldesign.essay
+        where essayId =#{essayId}
+    </select>
+
+    <select id="queryAllEssay" resultType="Essay">
+        select * from finaldesign.essay
+    </select>
+
+    <select id="queryEssayByName" resultType="Essay">
+        select * from finaldesign.essay where essayName=#{essayName}
+    </select>
+
+    <select id="queryEssayByCategory" resultType="Essay">
+        select * from finaldesign.essay where essayCategory=#{essayCategory}
+    </select>
+
+    <select id="queryEssayByDisplayName" resultType="Essay">
+        select * from finaldesign.essay where essayUserDisplayName=#{essayUserDisplayName}
+    </select>
+</mapper>

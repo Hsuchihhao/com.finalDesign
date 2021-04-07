@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalDesign.dao.UserMapper">
+
+
+    <!--新增用户-->
+    <insert id="addUser" parameterType="User">
+        insert into finaldesign.user (userName, userDisplayName, userPassword,userEmail)
+        values (#{userName}, #{userDisplayName}, #{userPassword}, #{userEmail});
+    </insert>
+
+
+    <!--根据ID删除用户-->
+    <delete id="deleteUserById" parameterType="int">
+        delete
+        from finaldesign.user
+        where userId = #{userId}
+
+    </delete>
+
+    <!--更新用户-->
+    <update id="updateUser" parameterType="User">
+        update finaldesign.user
+        set userName=#{userName},
+            userDisplayName=#{userDisplayName},
+            userPassword=#{userPassword},
+            userEmail=#{userEmail}
+        where userId = #{userId};
+    </update>
+
+    <!--根据用ID查询用户-->
+    <select id="queryUserById" resultType="User">
+        select *
+        from finaldesign.user
+        where userId =#{userId}
+    </select>
+
+    <!--查询所有用户-->
+    <select id="queryAllUser" resultType="User">
+        select * from finaldesign.user
+    </select>
+
+    <!--根据用户显示名字查询用户-->
+    <select id="queryUserByName" resultType="User">
+        select * from finaldesign.user where userDisplayName=#{userDisplayName}
+    </select>
+
+    <!--根据用户名和密码验证用户-->
+    <select id="findUserByNameAndPassword" resultType="User">
+        select * from finaldesign.user where userName=#{userName} and userPassword=#{userPassword}
+    </select>
+
+    <!--根据用户名查询用户-->
+    <select id="findUserByName" resultType="User">
+        select *from finaldesign.user where userName=#{userName}
+    </select>
+
+    <!--根据用户显示名字查询用户-->
+    <select id="findUserByDisplayName" resultType="User">
+        select *from finaldesign.user where userDisplayName=#{userDisplayName}
+    </select>
+</mapper>
