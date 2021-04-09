@@ -1,8 +1,18 @@
-
+<%--
+  Created by IntelliJ IDEA.
+  User: hsu
+  Date: 2021/4/8
+  Time: 16:11
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>私信</title>
+    <script src="${pageContext.request.contextPath}/statics/js/jquery-3.6.0.js"></script>
+    <link href="favicon.ico" rel="shortcut icon"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -16,9 +26,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/school/toMain">论坛</a>
+            <a class="navbar-brand" href="#">论坛</a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -52,25 +61,14 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
-
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <div class="page-header">
-                <h1>
-                    <small> 用户列表--新增用户</small>
-                </h1>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <div class="col-md-9 col-md-push-3">.col-md-9 .col-md-push-3</div>
+                <div class="col-md-3 col-md-pull-9">.col-md-3 .col-md-pull-9</div>
             </div>
         </div>
     </div>
-
-    <form action="${pageContext.request.contextPath}/user/addUser" method="post">
-
-        用户账号：<input type="text" name="userName" required><br><br><br>
-        用户名字：<input type="text" name="userDisplayName" required><br><br><br>
-        用户密码：<input type="text" name="userPassword" required><br><br><br>
-        用户邮箱：<input type="text" name="userEmail" required><br><br><br>
-        <input type="submit" value="添加">
-    </form>
 </div>
 </body>
 </html>

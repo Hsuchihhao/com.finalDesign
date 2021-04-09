@@ -19,7 +19,7 @@ public interface UserService {
 
     List<User> queryAllUser();
 
-    User queryUserByName( String userName);
+    User queryUserByName(String userName);
 
     User findUserByNameAndPassword(User user);
 

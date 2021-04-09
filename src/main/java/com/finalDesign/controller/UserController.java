@@ -49,7 +49,6 @@ public class UserController {
     @RequestMapping("/toAddUser")
     public String toAddPapper() {
         return "addUser";
-
     }
 
     @RequestMapping("/addUser")
@@ -161,19 +160,63 @@ public class UserController {
         List<Essay> essayList;
         if (session.getAttribute("userLoginInfo").equals("管理员")) {
             essayList = essayService.queryEssayByDisplayName((String) session.getAttribute("userLoginInfo"));
+            model.addAttribute("userPageName", (String) session.getAttribute("userLoginInfo"));
+            model.addAttribute("userAccount", (String) session.getAttribute("userLoginInfo"));
         } else {
             User user = new User();
             user.setUserName((String) session.getAttribute("userLoginInfo"));
             user = userService.findUserByName(user);
             System.out.println("用户信息---------------" + user);
             essayList = essayService.queryEssayByDisplayName(user.getUserDisplayName());
+            model.addAttribute("userPageName", user.getUserDisplayName());
+
         }
+
+        Integer flag = 1;
+
+        model.addAttribute("checkFlag", flag);
+        System.out.println("传递的flag-------" + flag);
         System.out.println("用户发表的文章-------------------------" + essayList);
         model.addAttribute("essayListByDisplayName", essayList);
         List<Follow> followList = followService.queryFollowByName((String) session.getAttribute("userLoginInfo"));
-        model.addAttribute("followList",followList);
-
+        model.addAttribute("followList", followList);
         return "userPage";
+    }
+
+    @RequestMapping("otherUserPage")
+    public String otherUserPage(String userName, HttpSession session, Model model) {
+
+        //trim()去掉空格
+        userName = userName.trim();
+        List<Essay> essayList;
+        User user = new User();
+        user.setUserName((String) session.getAttribute("userLoginInfo"));
+        user = userService.findUserByName(user);
+        System.out.println("已登录用户信息--------------" + user.getUserDisplayName());
+        System.out.println("获取到的作者名字--------------" + userName);
+        System.out.println("已登录用户信息对比--------------" + user.getUserDisplayName().trim().equals(userName));
+        if (!user.getUserDisplayName().trim().equals(userName)) {
+            System.out.println("不是自己的个人页面------------------");
+            User userRevice = new User();
+            userRevice.setUserDisplayName(userName);
+            userRevice=userService.findUserByDisplayName(userRevice);
+            System.out.println("接收方用户信息-----------" + userRevice);
+            essayList = essayService.queryEssayByDisplayName(userName);
+            model.addAttribute("essayListByDisplayName", essayList);
+            model.addAttribute("userPageName", userName);
+            System.out.println("个人页面显示的名字------------------" + userName);
+            model.addAttribute("userAccount", userRevice.getUserName());
+            List<Follow> followList = followService.queryFollowByName(user.getUserName());
+            model.addAttribute("followList", followList);
+            Integer flag = 0;
+            model.addAttribute("checkFlag", flag);
+            System.out.println("传递的flag-------" + flag);
+            return "userPage";
+        } else {
+            //跳转到中转页面
+            return "userPageIndirect";
+        }
+
     }
 
     @RequestMapping("toAdminEssay")

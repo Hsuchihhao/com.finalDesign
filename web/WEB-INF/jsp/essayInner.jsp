@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>主页</title>
+    <title>帖子</title>
     <link href="favicon.ico" rel="shortcut icon"/>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/statics/js/jquery-3.6.0.js"></script>
@@ -121,15 +121,15 @@
             <!--隐藏input获取值-->
             <input type="hidden" value="${essayInner.essayName}" name="commentEssay" id="commentEssay">
             <input type="hidden" value="${essayInner.essayCategory}" name="commentCategory" id="commentCategory">
-            <h5 align="center">作者：<a name="commentDisplayName"
-                                     id="commentDisplayName">${essayInner.essayUserDisplayName}</a>
+            <h5 align="center">作者：<a name="commentDisplayName" id="commentDisplayName" href="${pageContext.request.contextPath}/user/otherUserPage?userName=${essayInner.essayUserDisplayName}">${essayInner.essayUserDisplayName}</a>
                 发布时间：${essayInner.essayCreateTime}</h5>
             <h4>${essayInner.essayText}</h4>
             <br>
 
             <button type="button" class="btn btn-info" onclick="toBottom()">留言</button>
 
-            <button type="button" class="btn btn-success" style="float: right" id="followbtn" onclick="follow()">${followInnerInfo}</button>
+            <button type="button" class="btn btn-success" style="float: right" id="followbtn"
+                    onclick="follow()">${followInnerInfo}</button>
 
         </div>
     </div>

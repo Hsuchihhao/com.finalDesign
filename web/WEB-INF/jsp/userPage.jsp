@@ -16,7 +16,7 @@
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <style>
-        .text_slice{
+        .text_slice {
             width: 100px;
             display: block;
             overflow: hidden;
@@ -24,8 +24,40 @@
             text-overflow: ellipsis;
         }
     </style>
+    <script>
+        function userCheck() {
+            var flag =${checkFlag};
+            if (flag > 0) {
+                $("#privateChatButton").attr("style", "display:none;");
+            }
+        }
+
+        function sendMassage() {
+            $.get({
+                url:  "${pageContext.request.contextPath}/communication/sendMassageTest",
+
+                <%--"${pageContext.request.contextPath}/communication/sendMassage"--%>
+                data: {
+                    <%--"communicationText": $("#communicationText").val(),--%>
+                    <%--"communicationReceiverName":${userAccount}--%>
+                },
+                success: function (data) {
+                    if (data.toString() === 'ok') {
+                        console.log(data);
+                        $("#closeMassage").onclick();
+
+                    } else {
+                        $("#userInfo").css("color", "red");
+                        $("#userInfo").html(data);
+                    }
+
+                }
+            })
+        }
+    </script>
+
 </head>
-<body>
+<body onload="userCheck()">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -75,7 +107,7 @@
 </nav>
 <div class="row">
     <div class="col-md-6 col-md-offset-3"><h1>这是用户页面</h1>
-        <span>${userLoginInfo}</span>
+        <span id="userLoginInfo">${userLoginInfo}</span>
         <a href="${pageContext.request.contextPath}/user/goOutUser">注销</a>
         <h3>
             <a href="${pageContext.request.contextPath}/school/toMain">进入主页页面</a>
@@ -88,8 +120,33 @@
                 </a>
             </div>
             <div class="media-body">
-                <h4 class="media-heading">${userLoginInfo}</h4>
-                ...
+                <h4 class="media-heading">${userPageName}</h4>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"
+                        id="privateChatButton">私信
+                </button>
+                <form action="${pageContext.request.contextPath}">
+                <button type="submit" class="btn btn-info">测试按钮</button>
+                </form>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">私信</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea class="form-control" rows="3" id="communicationText"></textarea>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeMassage">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="sendMassage()">发送私信</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -113,9 +170,11 @@
                     <c:forEach var="essay" items="${essayListByDisplayName}">
                         <tr>
                             <td>${essay.essayId}</td>
-                            <td ><a href="${pageContext.request.contextPath}/essay/toEssayInner?EssayName=${essay.essayName}">${essay.essayName}</a></td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/essay/toEssayInner?EssayName=${essay.essayName}">${essay.essayName}</a>
+                            </td>
                             <td class="text_slice">${essay.essayText}</td>
-                            <td> <fmt:formatDate value="${essay.essayCreateTime}" pattern="yyyy-MM-dd HH:mm:ss" /> </td>
+                            <td><fmt:formatDate value="${essay.essayCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         </tr>
 
                     </c:forEach>
@@ -135,8 +194,10 @@
                     <tbody>
                     <c:forEach var="follow" items="${followList}">
                         <tr>
-                            <td ><a href="${pageContext.request.contextPath}/essay/toEssayInner?EssayName=${follow.followEssay}">${follow.followEssay}</a></td>
-                            <td >${follow.followCategory}</td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/essay/toEssayInner?EssayName=${follow.followEssay}">${follow.followEssay}</a>
+                            </td>
+                            <td>${follow.followCategory}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -144,9 +205,6 @@
             </div>
         </div>
     </div>
-
 </div>
-
-
 </body>
 </html>

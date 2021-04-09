@@ -52,8 +52,6 @@
                 }
             })
         }
-
-
         function pwddisfcous() {
             var pwd1 = document.getElementById("password").value;
             var pwd2 = document.getElementById("password2").value;
