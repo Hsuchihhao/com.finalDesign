@@ -34,23 +34,18 @@
 
         function sendMassage() {
             $.get({
-                url:  "${pageContext.request.contextPath}/communication/sendMassageTest",
-
-                <%--"${pageContext.request.contextPath}/communication/sendMassage"--%>
+                url:  "${pageContext.request.contextPath}/communication/sendMassage",
                 data: {
-                    <%--"communicationText": $("#communicationText").val(),--%>
-                    <%--"communicationReceiverName":${userAccount}--%>
+                    "communicationText": $("#communicationText").val(),
+                    "communicationReceiverName":"${userAccount}"
                 },
                 success: function (data) {
                     if (data.toString() === 'ok') {
                         console.log(data);
-                        $("#closeMassage").onclick();
+                        $('#myModal').modal('hide');
 
                     } else {
-                        $("#userInfo").css("color", "red");
-                        $("#userInfo").html(data);
                     }
-
                 }
             })
         }
@@ -94,9 +89,7 @@
                        data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">我的信息 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="${pageContext.request.contextPath}/communication/toCommunication">我的私信</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Separated link</a></li>
                     </ul>
@@ -124,9 +117,6 @@
                 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal"
                         id="privateChatButton">私信
                 </button>
-                <form action="${pageContext.request.contextPath}">
-                <button type="submit" class="btn btn-info">测试按钮</button>
-                </form>
             </div>
         </div>
         <!-- Modal -->
@@ -140,7 +130,6 @@
                     </div>
                     <div class="modal-body">
                         <textarea class="form-control" rows="3" id="communicationText"></textarea>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" id="closeMassage">关闭</button>

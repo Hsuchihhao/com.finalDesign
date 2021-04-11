@@ -17,7 +17,6 @@
 
     <bean id="BookServiceImpl" class="com.finalDesign.service.BookServiceImpl">
         <property name="bookMapper" ref="bookMapper"></property>
-        
     </bean>
 
     <bean id="UserServiceImpl" class="com.finalDesign.service.UserServiceImpl">

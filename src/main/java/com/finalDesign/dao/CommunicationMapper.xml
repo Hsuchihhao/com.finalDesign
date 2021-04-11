@@ -8,7 +8,21 @@
     <insert id="addCommunication" parameterType="Communication">
         insert into finaldesign.communication (communicationSendName, communicationText, communicationTime,
                                                communicationReceiverName)
-        VALUES (#{communicationSendName},#{communicationText},#{communicationTime},#{communicationReceiverName});
+        VALUES (#{communicationSendName}, #{communicationText}, #{communicationTime}, #{communicationReceiverName});
     </insert>
 
+    <select id="queryCommunicationByName" resultType="Communication">
+        select *
+        from finaldesign.communication
+        where communicationReceiverName = #{communicationReceiverName}
+           or communicationSendName =#{communicationSendName}
+    </select>
+
+    <select id="queryCommunicationByCommunication" resultType="Communication">
+        select *
+        from finaldesign.communication
+        where (communicationReceiverName = #{communicationReceiverName}
+           or communicationSendName =#{communicationSendName} ) and (communicationReceiverName = #{communicationReceiverName}
+            or communicationSendName =#{communicationSendName} )
+    </select>
 </mapper>

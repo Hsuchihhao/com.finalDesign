@@ -11,9 +11,25 @@
        https://www.springframework.org/schema/context/spring-context.xsd">
 
 
+    <!--json乱码-->
     <mvc:annotation-driven>
+      <!--  <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8">
+                </constructor-arg>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="objectMapper">
+                    <bean class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean">
+                        <property name="failOnEmptyBeans" value="false">
 
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </mvc:message-converters>-->
     </mvc:annotation-driven>
+
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
     <context:component-scan base-package="com.finalDesign.controller"></context:component-scan>
 

@@ -37,4 +37,5 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
         <property name="basePackage" value="com.finalDesign.dao"></property>
     </bean>
+
 </beans>

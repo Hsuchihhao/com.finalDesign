@@ -196,6 +196,7 @@ public class UserController {
         System.out.println("获取到的作者名字--------------" + userName);
         System.out.println("已登录用户信息对比--------------" + user.getUserDisplayName().trim().equals(userName));
         if (!user.getUserDisplayName().trim().equals(userName)) {
+
             System.out.println("不是自己的个人页面------------------");
             User userRevice = new User();
             userRevice.setUserDisplayName(userName);
@@ -205,7 +206,15 @@ public class UserController {
             model.addAttribute("essayListByDisplayName", essayList);
             model.addAttribute("userPageName", userName);
             System.out.println("个人页面显示的名字------------------" + userName);
-            model.addAttribute("userAccount", userRevice.getUserName());
+            if(userName.equals("管理员")){
+                System.out.println("是管理员页面------------------");
+                model.addAttribute("userAccount",userName);
+                System.out.println("发送的名字----------------------"+userName);
+            }else {
+                model.addAttribute("userAccount", userRevice.getUserName());
+                System.out.println("发送的名字----------------------"+userRevice.getUserName());
+            }
+
             List<Follow> followList = followService.queryFollowByName(user.getUserName());
             model.addAttribute("followList", followList);
             Integer flag = 0;
