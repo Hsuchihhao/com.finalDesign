@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Controller
 @RequestMapping("/communication")
 public class CommunicationController {
@@ -54,21 +54,28 @@ public class CommunicationController {
 
     @RequestMapping("toCommunication")
     public String toCommunication(HttpSession session, Model model) {
+        //获得当前登录用户所有的私信内容
         List<Communication> communicationList = communicationService.queryCommunicationByName((String) session.getAttribute("userLoginInfo"));
+       //打印私信内容
         System.out.println("communicationList-------------------" + communicationList);
+        //新建一个
         List<String> communicationNameList = new ArrayList<String>();
         for (Communication communication : communicationList) {
+            //如果发送人为当前登录对象
             if (communication.getCommunicationSendName().trim().equals((String) session.getAttribute("userLoginInfo"))) {
                 System.out.println("添加接收人到communicationNameList--------------------");
                 System.out.println("添加" + communication.getCommunicationReceiverName() + "到List-----------------");
+              //添加当前点击的私信对象名字到communicationNameList
                 communicationNameList.add(communication.getCommunicationReceiverName());
                 System.out.println("communicationNameList添加了一个--------------------");
             } else {
+                //如果发送人不是当前登录对象，添加发送名字到communicationNameList
                 System.out.println("添加发送人到communicationNameList--------------------");
                 communicationNameList.add(communication.getCommunicationSendName());
             }
         }
         System.out.println("communicationNameList------------------" + communicationNameList);
+        //List去重
         communicationNameList = delRepeat(communicationNameList);
         System.out.println("communicationNameList------------------" + communicationNameList);
         model.addAttribute("communicationNameList", communicationNameList);
@@ -78,9 +85,11 @@ public class CommunicationController {
 
     @ResponseBody
     @RequestMapping(value = "displayCommunication", produces = "text/html;charset=UTF-8")
-    public List<Communication> displayCommunication(HttpSession session, Model model, String userName) {
+    public String  displayCommunication(HttpSession session, Model model, String userName) throws JsonProcessingException, ParseException {
 
+        ObjectMapper mapper=new ObjectMapper();
         System.out.println("点进来的私聊用户------------------"+userName);
+        System.out.println("当前登录信息-------------------------------"+(String) session.getAttribute("userLoginInfo"));
 //        Communication communication = new Communication();
 //        communication.setCommunicationSendName(userName);
 //        communication.setCommunicationReceiverName((String) session.getAttribute("userLoginInfo"));
@@ -88,24 +97,48 @@ public class CommunicationController {
 //        for(Communication communication1:communicationList){
 //            System.out.println(communication1);
 //        }
-
+        //添加所点击的对象所有的私信到communicationList
         List<Communication> communicationList = communicationService.queryCommunicationByName(userName);
+        //新建communicationInnerList
         List<Communication> communicationInnerList = new ArrayList<Communication>();
         for (Communication communication : communicationList) {
+            //如果发件人是登录用户，就添加私信到list
             if (communication.getCommunicationSendName().trim().equals((String) session.getAttribute("userLoginInfo"))) {
                 communicationInnerList.add(communication);
             } else if (communication.getCommunicationSendName().trim().equals(userName) && communication.getCommunicationReceiverName().trim().equals((String) session.getAttribute("userLoginInfo"))) {
+             //如果发件人是当前选定用户，并且收件人是登录用户，也添加私信到list
                 communicationInnerList.add(communication);
             }
         }
 
-        System.out.println("私信具体内容--------------" + communicationInnerList);
+        for(Communication communication:communicationInnerList){
+            System.out.println("私信具体内容--------------" + communication);
+        }
+
         model.addAttribute("communicationInnerList",communicationInnerList);
+
+
         if (communicationInnerList != null) {
-            return communicationInnerList;
+
+//          for(Communication communication:communicationList){
+//              System.out.println("转换前的时间-------------------"+communication.getCommunicationTime());
+//            Timestamp dateStr=communication.getCommunicationTime();
+//              SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//              Date commTime = sdf.parse(String.valueOf(dateStr));
+//              communication.setCommunicationTime((Timestamp) commTime);
+//              System.out.println("转换后的时间-------------------"+communication.getCommunicationTime());
+//
+//          }
+        String str= mapper.writeValueAsString(communicationInnerList);
+            return str;
         } else {
             return null;
         }
 
+    }
+
+    @RequestMapping("toCommTest")
+    public String toCommTest(){
+        return "commTest";
     }
 }

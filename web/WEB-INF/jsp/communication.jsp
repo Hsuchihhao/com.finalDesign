@@ -14,28 +14,64 @@
     <link href="favicon.ico" rel="shortcut icon"/>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style>
+        .inTer{
+            width:100%;
+            height:70%;
+            border:1px solid deeppink;
+            margin:0 auto;
+            margin-top:10px;
+            overflow-y:auto;
+        }
+    </style>
     <script>
-        function displayCommunication() {
-
+        // $("#userName").click(function (){
+        //
+        // })
+        var p = document.getElementsByTagName("p");
+        function displayCommunication(thisName) {
+            $("#father").empty();
+            console.log("thisName-----------------------"+thisName);
             $.get({
                 url: "${pageContext.request.contextPath}/communication/displayCommunication",
-                data: {"userName": $("#displayName").val()},
+                data: {"userName":$(thisName).text()},
                 datatype:"json",
                 success: function (data) {
-                    console.log(data);
-                    // $("#commDisplayText").text(data)
-                    <%--if (data.toString() === 'ok') {--%>
-                    <%--    var array = new Array();--%>
-                    <%--    $("#commDisplayText").text("${communicationInnerList.communicationText}")--%>
-                    <%--    console.log("${communicationInnerList.communicationText}")--%>
-                    <%--    <c:forEach items="${communicationInnerList}" var="communication" varStatus="status">--%>
-                    <%--        array.push("${items}");--%>
-                    <%--        var temp="${items}";--%>
-                    <%--        alert("${status.count}");--%>
-                    <%--        alert("${item.communicationText}")--%>
-                    <%--    </c:forEach>--%>
-                    <%--    console.log(data);--%>
-                    <%--}--%>
+                    console.log(data+"data-----------------------------");
+                    var jsonList= JSON.parse(data);
+                    var commDisplayTextString="";
+                    var myCommDisplayTextString=""
+
+                    for(var i=0;i<jsonList.length;i++){
+                        if(jsonList[i].communicationSendName== $("#displayName").text()){
+                            console.log("成功判断"+$("#displayName").text());
+                            commDisplayTextString=commDisplayTextString+"\n"+jsonList[i].communicationText;
+                            var son = document.createElement("p");
+                            son.style.backgroundColor="yellowgreen";
+                            son.style.clear="both";
+                            son.style.float="left";
+                            son.style.marginRight="5px";
+                            son.innerText=jsonList[i].communicationText;
+                            father.appendChild(son);
+                            son.scrollIntoView();
+                        }else {
+                            myCommDisplayTextString=myCommDisplayTextString+"\n"+jsonList[i].communicationText;
+                            var son = document.createElement("p");
+                            son.style.backgroundColor="yellowgreen";
+                            son.style.clear="both";
+                            son.style.float="right";
+                            son.style.marginRight="5px";
+                            son.innerText=jsonList[i].communicationText;
+                            father.appendChild(son);
+                            son.scrollIntoView();
+                        }
+
+
+                        $("#commDisplayText").text(commDisplayTextString+"------"+myCommDisplayTextString)
+                    }
+                    console.log(commDisplayTextString);
+                    console.log("-----------------------------")
+                    console.log(myCommDisplayTextString);
                 }
             })
         }
@@ -106,10 +142,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach var="communicationName" items="${communicationNameList}">
-                                            <input hidden="hidden" id="displayName" value=${communicationName}>
                                             <tr>
-                                                <td><a onclick="displayCommunication()">${communicationName}</a></td>
+                                                <c:forEach var="communicationName" items="${communicationNameList}">
+                                              <td><button onclick="displayCommunication(this)" class="btn btn-primary" type="button" id="displayName">${communicationName}</button></td>
                                             </tr>
                                         </c:forEach>
                                         </tbody>
@@ -120,9 +155,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-8">
-                            <textarea class="form-control" rows="20" id="commDisplayText">
-
-                            </textarea>
+                            <div class="inTer" id="father">
+                            </div>
                             <textarea class="form-control" rows="4"></textarea>
                             <button class="btn btn-primary" type="button" style="float: right">回复</button>
                         </div>
