@@ -18,7 +18,7 @@
         .inTer{
             width:100%;
             height:70%;
-            border:1px solid deeppink;
+            border:1px solid #000000;
             margin:0 auto;
             margin-top:10px;
             overflow-y:auto;
@@ -29,6 +29,7 @@
         //
         // })
         var p = document.getElementsByTagName("p");
+        var commTime=document.getElementsByTagName("commTime");
         function displayCommunication(thisName) {
             $("#father").empty();
             console.log("thisName-----------------------"+thisName);
@@ -41,31 +42,56 @@
                     var jsonList= JSON.parse(data);
                     var commDisplayTextString="";
                     var myCommDisplayTextString=""
-
+                    var br = document.createElement("br");
                     for(var i=0;i<jsonList.length;i++){
                         if(jsonList[i].communicationSendName== $("#displayName").text()){
-                            console.log("成功判断"+$("#displayName").text());
                             commDisplayTextString=commDisplayTextString+"\n"+jsonList[i].communicationText;
+                            //timeSon为发送时间
+                            //每次循环时都要新创建一个Element
+                            var timeSon = document.createElement("p");
+                            timeSon.align="center";
+                            timeSon.style.marginRight="5px";
+                            timeSon.innerText=jsonList[i].communicationTime;
+                            father.appendChild(timeSon);
+                            father.appendChild(document.createElement("br"));
+                            timeSon.scrollIntoView();
+                            //timeSon为发送的内容
                             var son = document.createElement("p");
-                            son.style.backgroundColor="yellowgreen";
                             son.style.clear="both";
                             son.style.float="left";
                             son.style.marginRight="5px";
                             son.innerText=jsonList[i].communicationText;
                             father.appendChild(son);
+                            //如果添加的孩子是不变的，那么将不会添加新的，而是会移动他
+                            father.appendChild(document.createElement("br"));
+                            father.appendChild(document.createElement("br"));
                             son.scrollIntoView();
+                            console.log("发送私信第"+i+"个------")
+
                         }else {
                             myCommDisplayTextString=myCommDisplayTextString+"\n"+jsonList[i].communicationText;
+
+                            var timeSon = document.createElement("p");
+
+                            timeSon.align="center";
+                            timeSon.style.display="block";
+                            timeSon.style.marginRight="5px";
+                            timeSon.innerText=jsonList[i].communicationTime;
+                            father.appendChild(timeSon);
+                            father.appendChild(document.createElement("br"));
+                            timeSon.scrollIntoView();
+
                             var son = document.createElement("p");
-                            son.style.backgroundColor="yellowgreen";
                             son.style.clear="both";
                             son.style.float="right";
                             son.style.marginRight="5px";
                             son.innerText=jsonList[i].communicationText;
                             father.appendChild(son);
+                            father.appendChild(document.createElement("br"));
+                            father.appendChild(document.createElement("br"));
                             son.scrollIntoView();
-                        }
 
+                        }
 
                         $("#commDisplayText").text(commDisplayTextString+"------"+myCommDisplayTextString)
                     }
@@ -161,7 +187,6 @@
                             <button class="btn btn-primary" type="button" style="float: right">回复</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

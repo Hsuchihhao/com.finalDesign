@@ -76,8 +76,9 @@ public class EssayController {
         }
 
 
+        //获取当前时间
         String nowTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-
+        //添加时间到《Bean》
         essay.setEssayCreateTime(Timestamp.valueOf(nowTime));
         System.out.println("添加文章时获取用户名字：-------------"+essay.getEssayUserDisplayName());
         essayService.addEssay(essay);

@@ -253,7 +253,7 @@ public class UserController {
             model.addAttribute("username", name);
             session.setAttribute("userDisplayName", name);
             System.out.println("账号密码正确" + userlogin);
-            return "userPage";
+            return "userPageIndirect";
         } else {
             System.out.println("账号密码错误");
             return "login";

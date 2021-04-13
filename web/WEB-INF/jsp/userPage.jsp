@@ -64,7 +64,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">论坛</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/school/toMain">论坛</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,7 +91,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="${pageContext.request.contextPath}/communication/toCommunication">我的私信</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/goOutUser">退出登录</a></li>
                     </ul>
                 </li>
             </ul>
@@ -99,12 +99,7 @@
     </div><!-- /.container-fluid -->
 </nav>
 <div class="row">
-    <div class="col-md-6 col-md-offset-3"><h1>这是用户页面</h1>
-        <span id="userLoginInfo">${userLoginInfo}</span>
-        <a href="${pageContext.request.contextPath}/user/goOutUser">注销</a>
-        <h3>
-            <a href="${pageContext.request.contextPath}/school/toMain">进入主页页面</a>
-        </h3>
+    <div class="col-md-6 col-md-offset-3">
         <div class="media">
             <div class="media-left media-middle">
                 <a href="#">
@@ -148,7 +143,7 @@
                 <table class="table table-hover table-striped">
                     <thead>
                     <tr>
-                        <th>文章编号</th>
+
                         <th>文章名字</th>
                         <th>文章内容</th>
                         <th>发布时间</th>
@@ -158,7 +153,7 @@
                     <tbody>
                     <c:forEach var="essay" items="${essayListByDisplayName}">
                         <tr>
-                            <td>${essay.essayId}</td>
+
                             <td>
                                 <a href="${pageContext.request.contextPath}/essay/toEssayInner?EssayName=${essay.essayName}">${essay.essayName}</a>
                             </td>

@@ -77,7 +77,7 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    <small> 文章列表--修改文章</small>
+                    <small> 文章列表--添加文章</small>
                 </h1>
             </div>
         </div>

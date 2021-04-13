@@ -4,6 +4,8 @@ package com.finalDesign.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationConfig;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.finalDesign.pojo.Communication;
 import com.finalDesign.service.CommunicationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,8 +118,10 @@ public class CommunicationController {
         }
 
         model.addAttribute("communicationInnerList",communicationInnerList);
-
-
+        for(Communication communication:communicationList){
+            System.out.println("转换前的时间-------------------"+communication.getCommunicationTime());
+        }
+        mapper.configure(SerializationFeature.CLOSE_CLOSEABLE.WRITE_DATES_AS_TIMESTAMPS, false);
         if (communicationInnerList != null) {
 
 //          for(Communication communication:communicationList){
