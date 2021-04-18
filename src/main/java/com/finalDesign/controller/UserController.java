@@ -43,7 +43,7 @@ public class UserController {
     public String list(Model model) {
         List<User> list = userService.queryAllUser();
         model.addAttribute("list", list);
-        return "allUser";
+        return "adminUser";
     }
 
     @RequestMapping("/toAddUser")

@@ -25,95 +25,88 @@
     </script>
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">论坛</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/school/toMain">返回论坛</a>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">主页 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
-
-            </ul>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="输入内容">
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
+        <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">主页</a></li>
-                <li><a href="${pageContext.request.contextPath}/essay/allEssay">管理员界面</a></li>
-                <li class="dropdown">
-                    <a href="${pageContext.request.contextPath}/user/toUserPage" class="dropdown-toggle"
-                       data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">我的信息 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Help</a></li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="Search...">
+            </form>
+        </div>
+    </div>
 </nav>
-<div class="container">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="${pageContext.request.contextPath}/essay/allEssay">总览 <span class="sr-only">(current)</span></a>
+                </li>
+                <li><a href="${pageContext.request.contextPath}/user/allUser">用户</a></li>
+                <li><a href="${pageContext.request.contextPath}/school/allSchool">学校 <span class="sr-only">(current)</span></a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li>
+                    <a data-toggle="modal" data-target="#addEssay"
+                       id="privateChatButton" href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
+                </li>
+                <li><a href="">新增用户</a></li>
+                <li><a href="">新增学校</a></li>
+            </ul>
+            <ul class="nav nav-sidebar">
+                <li><a href="">退出</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">总览</h1>
+            <form action="${pageContext.request.contextPath}/essay/addEssay" method="post">
 
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <div class="page-header">
-                <h1>
-                    <small> 文章列表--修改文章</small>
-                </h1>
-            </div>
+                <input type="hidden" name="essayUserDisplayName" value="${addEssayUserInfo}">
+                文章名字：<input type="text" class="form-control" name="essayName" required ><br><br><br>
+                文章内容：<textarea id="essayText" class="form-control" name="essayText" required class="form-control"
+                               rows="6"></textarea><br><br><br>
+                <div class="form-group">
+                    文章作者： <label>${addEssayUserInfo}</label>
+
+                </div>
+                文章分类：
+                <div class="dropdown" id="myDrop">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="true">
+                        ${QEssay.essayCategory}
+
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="schoolul" >
+                        <c:forEach var="school" items="${QSchool}">
+                            <li  id="selectSchoolName">
+                                <a href="#" name="${school.schoolName}" >${school.schoolName}</a>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+                <input readonly="readonly" type="hidden" name="essayCategory" id="inputEssayCategory">
+                <br><br><br>
+                <button type="submit" class="btn btn-primary">修改</button>
+            </form>
+
         </div>
     </div>
 
-    <form action="${pageContext.request.contextPath}/essay/addEssay" method="post">
-
-        <input type="hidden" name="essayUserDisplayName" value="${addEssayUserInfo}">
-        文章名字：<input type="text" class="form-control" name="essayName" required ><br><br><br>
-        文章内容：<textarea id="essayText" class="form-control" name="essayText" required class="form-control"
-                       rows="6"></textarea><br><br><br>
-        <div class="form-group">
-            文章作者： <label>${addEssayUserInfo}</label>
-
-        </div>
-        文章分类：
-        <div class="dropdown" id="myDrop">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="true">
-                ${QEssay.essayCategory}
-
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="schoolul" >
-                <c:forEach var="school" items="${QSchool}">
-                    <li  id="selectSchoolName">
-                        <a href="#" name="${school.schoolName}" >${school.schoolName}</a>
-                    </li>
-                </c:forEach>
-
-            </ul>
-        </div>
-        <input readonly="readonly" type="hidden" name="essayCategory" id="inputEssayCategory">
-        <br><br><br>
-        <button type="submit" class="btn btn-primary">修改</button>
-    </form>
 </div>
 
 <script type="text/javascript">

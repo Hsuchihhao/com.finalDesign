@@ -48,19 +48,20 @@ public class EssayController {
         model.addAttribute("list", list);
 
         System.out.println("管理员界面全部文章------"+list);
-        return "adminEssay";
+        return "adminMain";
     }
+
 
     @RequestMapping("/toAdminAddEssay")
     public String toAdminAddEssay(Model model,HttpSession session) {
         List<School> schoolList=schoolService.queryAllSchool();
         model.addAttribute("QSchool",schoolList);
-
        String adminInfo=((String) session.getAttribute("userLoginInfo"));
         model.addAttribute("addEssayUserInfo",adminInfo);
         System.out.println("管理员信息--------------------"+adminInfo);
         return "adminAddEssay";
     }
+
 
     @RequestMapping("/addEssay")
     public String addEssay(Essay essay, HttpSession session) {

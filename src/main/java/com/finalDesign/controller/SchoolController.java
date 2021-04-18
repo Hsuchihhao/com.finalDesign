@@ -77,7 +77,7 @@ public class SchoolController {
     public String list(Model model) {
         List<School> list = schoolService.queryAllSchool();
         model.addAttribute("list", list);
-        return "allSchool";
+        return "adminSchool";
     }
 
     @RequestMapping("toAllSchool")
