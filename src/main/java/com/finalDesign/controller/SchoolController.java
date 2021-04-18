@@ -58,10 +58,14 @@ public class SchoolController {
         schoolService.addSchool(school);
         return "allSchool";
     }
+
     @ResponseBody
     @RequestMapping("/addSchool2")
     public String addSchool2(@RequestParam("schoolPic2") CommonsMultipartFile file, HttpServletRequest request,String schoolName,String schoolProfile) throws IOException {
         String path = "D:\\IDEAProjects\\SchoolPicUpload";
+        System.out.println("获取的学校名字---------------"+schoolName);
+        System.out.println("获取的学校介绍---------------"+schoolProfile);
+        System.out.println("获取的学校图片路径---------------"+file);
         String originalFilename = file.getOriginalFilename();
         String newFileName = UUID.randomUUID() + originalFilename;
         File targetFile = new File(path, newFileName);

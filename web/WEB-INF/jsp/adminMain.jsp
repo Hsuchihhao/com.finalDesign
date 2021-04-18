@@ -11,7 +11,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+
 
     <title>管理端界面</title>
     <script src="${pageContext.request.contextPath}/statics/js/jquery-3.6.0.js"></script>
@@ -19,22 +19,9 @@
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/statics/css/dashboard.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]>
-    <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <style>
         .text_slice {
             width: 100px;
@@ -46,33 +33,7 @@
         }
     </style>
     <script>
-        function addSchoolBtn() {
-            var obj=$("#schoolPic2")[0].files;
-            var formData = new FormData();
 
-            $.get({
-                url:  "${pageContext.request.contextPath}/school/addSchool2",
-                "xhrFields": {                // 这样在请求的时候会自动将浏览器中的cookie发送给后台
-                    withCredentials: true
-                },
-                cache:false,
-                contentType: false,
-                processData: false,
-                data: {
-                    "schoolPic2": $("#schoolPic2").val(),
-                    "schoolProfile":$("#schoolProfile").val(),
-                    formData,
-                },
-                success: function (data) {
-                    if (data.toString() === 'ok') {
-                        console.log(data);
-                        $('#myModal').modal('hide');
-
-                    } else {
-                    }
-                }
-            })
-        }
     </script>
 </head>
 <body>
@@ -115,12 +76,12 @@
 
             <ul class="nav nav-sidebar">
                 <li>
-                    <a
-                            href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
+                    <a href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
                 </li>
+
                 <li><a href="">新增用户</a></li>
-                <li><a data-toggle="modal" data-target="#addSchool"
-                       id="addSchoolHref" href="">新增学校</a></li>
+
+                <li><a href="${pageContext.request.contextPath}/school/toAddSchool">新增学校</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="">退出</a></li>
