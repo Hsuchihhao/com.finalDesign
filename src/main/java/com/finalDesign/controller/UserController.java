@@ -190,8 +190,15 @@ public class UserController {
         userName = userName.trim();
         List<Essay> essayList;
         User user = new User();
-        user.setUserName((String) session.getAttribute("userLoginInfo"));
-        user = userService.findUserByName(user);
+        System.out.println(session.getAttribute("userLoginInfo").equals("管理员"));
+        //判断是管理员在登录，就不添加user的信息
+        if(session.getAttribute("userLoginInfo").equals("管理员")){
+            user.setUserDisplayName("管理员");
+        }else {
+            user.setUserName((String) session.getAttribute("userLoginInfo"));
+            user = userService.findUserByName(user);
+        }
+
         System.out.println("已登录用户信息--------------" + user.getUserDisplayName());
         System.out.println("获取到的作者名字--------------" + userName);
         System.out.println("已登录用户信息对比--------------" + user.getUserDisplayName().trim().equals(userName));

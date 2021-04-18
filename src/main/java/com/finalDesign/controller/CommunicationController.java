@@ -145,4 +145,9 @@ public class CommunicationController {
     public String toCommTest(){
         return "commTest";
     }
+
+    @RequestMapping("newAdmin")
+    public String toNewAdmin(){
+        return "adminMain";
+    }
 }

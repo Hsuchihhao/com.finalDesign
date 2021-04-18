@@ -32,6 +32,7 @@
         var commTime=document.getElementsByTagName("commTime");
         function displayCommunication(thisName) {
             $("#father").empty();
+            $("#reciveName").name("displayName.text()");
             console.log("thisName-----------------------"+thisName);
             $.get({
                 url: "${pageContext.request.contextPath}/communication/displayCommunication",
@@ -184,6 +185,7 @@
                             <div class="inTer" id="father">
                             </div>
                             <textarea class="form-control" rows="4"></textarea>
+                            <input name="" id="reciveName" disabled="disabled">
                             <button class="btn btn-primary" type="button" style="float: right">回复</button>
                         </div>
                     </div>

@@ -43,5 +43,8 @@
 <h3>
     <a href="${pageContext.request.contextPath}/communication/toCommTest">进入CommTest测试</a>
 </h3>
+<h3>
+    <a href="${pageContext.request.contextPath}/communication/newAdmin">进入新管理员页面</a>
+</h3>
 </body>
 </html>
