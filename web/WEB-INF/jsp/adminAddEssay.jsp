@@ -1,28 +1,50 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: hsu
-  Date: 2021/3/8
-  Time: 17:36
-  To change this template use File | Settings | File Templates.
---%>
+<!DOCTYPE html>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title>添加文章</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>管理端界面</title>
     <script src="${pageContext.request.contextPath}/statics/js/jquery-3.6.0.js"></script>
     <link href="favicon.ico" rel="shortcut icon"/>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 
-    <script>
-        // function selectSchool() {
-        //     console.log("点击选择框");
-        //     var schoolName = document.getElementById("selectSchoolName").innerText;
-        //     $(dropdownMenu1).text(schoolName);
-        //     console.log(schoolName);
-        // }
-    </script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="${pageContext.request.contextPath}/statics/css/dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]>
+    <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .text_slice {
+            width: 100px;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -50,18 +72,20 @@
         </div>
     </div>
 </nav>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="${pageContext.request.contextPath}/essay/allEssay">总览 <span class="sr-only">(current)</span></a>
+                <li ><a href="${pageContext.request.contextPath}/essay/allEssay">总览 <span class="sr-only">(current)</span></a>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/user/allUser">用户</a></li>
                 <li><a href="${pageContext.request.contextPath}/school/allSchool">学校 <span class="sr-only">(current)</span></a></li>
             </ul>
+
             <ul class="nav nav-sidebar">
-                <li>
-                    <a data-toggle="modal" data-target="#addEssay"
+                <li class="active">
+                    <a data-toggle="modal" data-target="#"
                        id="privateChatButton" href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
                 </li>
                 <li><a href="">新增用户</a></li>
@@ -72,7 +96,8 @@
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">总览</h1>
+            <h1 class="page-header">新增文章</h1>
+
             <form action="${pageContext.request.contextPath}/essay/addEssay" method="post">
 
                 <input type="hidden" name="essayUserDisplayName" value="${addEssayUserInfo}">
@@ -103,12 +128,22 @@
                 <br><br><br>
                 <button type="submit" class="btn btn-primary">修改</button>
             </form>
-
         </div>
     </div>
 
+
 </div>
 
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="../../assets/js/vendor/holder.min.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 <script type="text/javascript">
     // 获取选中的值
     $("#schoolul li").on('click',function(){

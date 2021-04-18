@@ -86,7 +86,10 @@
                         class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav nav-sidebar">
-            <li><a href="">新增文章</a></li>
+                <li >
+                    <a data-toggle="modal" data-target="#"
+                       id="privateChatButton" href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
+                </li>
             <li><a href="">新增用户</a></li>
             <li><a href="">新增学校</a></li>
         </ul>

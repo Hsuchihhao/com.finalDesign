@@ -64,9 +64,7 @@
     </div>
 
     <form action="${pageContext.request.contextPath}/school/addSchool" method="post" enctype="multipart/form-data">
-
         学校名字：<input type="text" name="schoolName" required><br><br><br>
-        学校图片：<input type="text" name="schoolPic" required><br><br><br>
         学校图片：<input type="file" name="schoolPic2" required><br><br><br>
         学校介绍：<input type="text" name="schoolProfile" required><br><br><br>
         <input type="submit" value="添加">

@@ -45,10 +45,37 @@
 
         }
     </style>
+    <script>
+        function addSchoolBtn() {
+            var obj=$("#schoolPic2")[0].files;
+            var formData = new FormData();
+
+            $.get({
+                url:  "${pageContext.request.contextPath}/school/addSchool2",
+                "xhrFields": {                // 这样在请求的时候会自动将浏览器中的cookie发送给后台
+                    withCredentials: true
+                },
+                cache:false,
+                contentType: false,
+                processData: false,
+                data: {
+                    "schoolPic2": $("#schoolPic2").val(),
+                    "schoolProfile":$("#schoolProfile").val(),
+                    formData,
+                },
+                success: function (data) {
+                    if (data.toString() === 'ok') {
+                        console.log(data);
+                        $('#myModal').modal('hide');
+
+                    } else {
+                    }
+                }
+            })
+        }
+    </script>
 </head>
-
 <body>
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -82,16 +109,18 @@
                 <li class="active"><a href="${pageContext.request.contextPath}/essay/allEssay">总览 <span class="sr-only">(current)</span></a>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/user/allUser">用户</a></li>
-                <li><a href="${pageContext.request.contextPath}/school/allSchool">学校 <span class="sr-only">(current)</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/school/allSchool">学校 <span
+                        class="sr-only">(current)</span></a></li>
             </ul>
 
             <ul class="nav nav-sidebar">
                 <li>
-                    <a data-toggle="modal" data-target="#"
-                       id="privateChatButton" href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
+                    <a
+                            href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
                 </li>
                 <li><a href="">新增用户</a></li>
-                <li><a href="">新增学校</a></li>
+                <li><a data-toggle="modal" data-target="#addSchool"
+                       id="addSchoolHref" href="">新增学校</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="">退出</a></li>
@@ -163,21 +192,50 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addEssay" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="addSchool" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">新增文章</h4>
+                    <h4 class="modal-title" id="myModalLabel">新增学校</h4>
                 </div>
+                <form enctype="multipart/form-data">
                 <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-6 col-md-offset-3">
+
+                            <div class="input-group">
+                                学校名字：<input type="text" class="form-control" name="schoolName"
+                                            aria-describedby="sizing-addon2" required>
+                            </div>
+
+                            <br><br>
+
+                            <div class="input-group">
+                                学校图片：<input type="file" class="form-control" name="schoolPic2"
+                                         id="schoolPic2"   aria-describedby="sizing-addon2" required>
+                            </div>
+
+                            <br><br>
+
+                            <div class="input-group">
+                                学校介绍：<input type="text" class="form-control" name="schoolProfile"
+                                         id="schoolProfile"   aria-describedby="sizing-addon2" required>
+                            </div>
+                            <br><br>
+
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal" id="closeMassage">关闭
                     </button>
-                    <button type="button" class="btn btn-primary" onclick="sendMassage()">确定新增</button>
+                    <button type="button" class="btn btn-primary" onclick="addSchoolBtn()">确定新增</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

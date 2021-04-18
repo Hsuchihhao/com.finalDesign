@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +54,23 @@ public class SchoolController {
         String fileNameInDB = newFileName;
         file.transferTo(targetFile);
         school.setSchoolPic(fileNameInDB);
+        System.out.println(school);
+        schoolService.addSchool(school);
+        return "allSchool";
+    }
+    @ResponseBody
+    @RequestMapping("/addSchool2")
+    public String addSchool2(@RequestParam("schoolPic2") CommonsMultipartFile file, HttpServletRequest request,String schoolName,String schoolProfile) throws IOException {
+        String path = "D:\\IDEAProjects\\SchoolPicUpload";
+        String originalFilename = file.getOriginalFilename();
+        String newFileName = UUID.randomUUID() + originalFilename;
+        File targetFile = new File(path, newFileName);
+        String fileNameInDB = newFileName;
+        file.transferTo(targetFile);
+        School school=new School();
+        school.setSchoolPic(fileNameInDB);
+        school.setSchoolName(schoolName);
+        school.setSchoolProfile(schoolProfile);
         System.out.println(school);
         schoolService.addSchool(school);
         return "allSchool";
