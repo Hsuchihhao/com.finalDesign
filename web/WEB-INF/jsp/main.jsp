@@ -11,19 +11,19 @@
 <head>
     <meta charset="utf-8">
     <title>主页</title>
-
+    <script src="${pageContext.request.contextPath}/statics/js/jquery-3.6.0.js"></script>
     <link href="favicon.ico" rel="shortcut icon"/>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
-
     <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-
+    <!-- jQThumb缩略图插件 -->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/statics/js/jqthumb.js"></script>
     <script>
         //处理缩略图
         function DrawImage(hotimg) {
             $(hotimg).jqthumb({
                 width: '100%',//宽度
-                height: '142px',//高度
-                //position : { y: '50%', x: '50%'},//从图片的中间开始产生缩略图
+                height: '25%px',//高度
+                position : { y: '50%', x: '50%'},//从图片的中间开始产生缩略图
                 zoom: '1',//缩放比例
                 method: 'auto'//提交方法，用于不同的浏览器环境，默认为‘auto’
             });
@@ -46,7 +46,14 @@
             color: #fff;
             font-size: 20px;
         }
+        .jqthumb {
+            width: 100% !important;
+        }
+        .jqthumb > div {
+            background-size: auto 100% !important;
+        }
     </style>
+
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -80,15 +87,12 @@
                 <li><a href="#">主页</a></li>
                 <li><a href="${pageContext.request.contextPath}/essay/allEssay">管理员</a></li>
                 <li class="dropdown">
-                    <a href="${pageContext.request.contextPath}/user/toUserPage" class="dropdown-toggle"
+                    <a  class="dropdown-toggle"
                        data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">我的信息 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li ><a href="${pageContext.request.contextPath}/user/toUserPage">登录</a></li>
+
                     </ul>
                 </li>
             </ul>

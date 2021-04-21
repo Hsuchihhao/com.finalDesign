@@ -35,6 +35,13 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.all.min.js"></script>
+    <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+    <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/lang/zh-cn/zh-cn.js"></script>
+
     <style>
         .text_slice {
             width: 100px;
@@ -102,8 +109,10 @@
 
                 <input type="hidden" name="essayUserDisplayName" value="${addEssayUserInfo}">
                 文章名字：<input type="text" class="form-control" name="essayName" required ><br><br><br>
-                文章内容：<textarea id="essayText" class="form-control" name="essayText" required class="form-control"
-                               rows="6"></textarea><br><br><br>
+                文章内容：<script id="editor" name="essayText" type="text/plain" style="width:1024px;height:200px;"></script>
+<%--                <textarea id="essayText" class="form-control" name="essayText" required class="form-control"--%>
+<%--                               rows="6"></textarea>--%>
+                <br><br><br>
                 <div class="form-group">
                     文章作者： <label>${addEssayUserInfo}</label>
 
@@ -163,4 +172,9 @@
     });
 </script>
 </body>
+<script type="text/javascript">
+    // 实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+</script>
 </html>

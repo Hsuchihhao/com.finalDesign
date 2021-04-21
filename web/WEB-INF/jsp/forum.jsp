@@ -14,9 +14,46 @@
     <title>主页</title>
     <link href="favicon.ico" rel="shortcut icon"/>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+        #myBtn {
+            display: none;
+            position: fixed;
+
+            right: 20%;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #ffffff;
+            color: #2d64b3;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .myBtn {
+            display: none;
+            position: fixed;
+
+            right: 20%;
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #ffffff;
+            color: #2d64b3;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        #myBtn:hover {
+            background-color: #ffffff;
+        }
+
+    </style>
+
 </head>
 <body>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -27,7 +64,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">论坛</a>
+            <a class="navbar-brand" href="#" id="top">论坛</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -69,31 +106,57 @@
           href="${pageContext.request.contextPath}/school/toAddSchoolEssay?id=${QSchool.schoolId}"
           role="button">我有想法</a></p>
 </div>
-<div class="row clearfix">
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-md-6 col-md-offset-3 column">
+            <table class="table table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>文章名字</th>
+                    <th>文章作者</th>
+                    <th>发布时间</th>
+                </tr>
 
-    <div class="col-md-12 column">
-        <table class="table table-hover table-striped">
-            <thead>
-                        <tr>
-                            <th>文章名字</th>
-                            <th>文章作者</th>
-                            <th>发布时间</th>
-                        </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="essay" items="${essayList}">
+                    <tr>
 
-            </thead>
-            <tbody>
-                        <c:forEach var="essay" items="${essayList}">
-                            <tr>
-                                <td><a href="${pageContext.request.contextPath}/essay/toEssayInner?EssayName=${essay.essayName}">${essay.essayName}</a></td>
-                                <td>${essay.essayUserDisplayName}</td>
-                                <td><fmt:formatDate value="${essay.essayCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                            </tr>
-                        </c:forEach>
+                        <td style="min-height: 50px"><a
+                                href="${pageContext.request.contextPath}/essay/toEssayInner?EssayName=${essay.essayName}">${essay.essayName}</a>
+                        </td>
+                        <td>${essay.essayUserDisplayName}</td>
+                        <td><fmt:formatDate value="${essay.essayCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 
-            </tbody>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
 
-        </table>
+        <button onclick="topFunction()" id="myBtn" title="回顶部">返回顶部</button>
+        <button onclick="topFunction()" class="myBtn" title="回顶部">刷新</button>
+
     </div>
 </div>
+
+<script>
+
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {console.log(121);
+        if (document.body.scrollTop > 5 || document.documentElement.scrollTop > 5) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    // 点击按钮，返回顶部
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+</script>
 </body>
 </html>

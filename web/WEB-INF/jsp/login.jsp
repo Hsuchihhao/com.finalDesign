@@ -87,12 +87,6 @@
             </div>
         </form>
 
-        <form action="${pageContext.request.contextPath}/admin/toAdminLogin" method="post">
-            <div class="form-group">
-                <button type="submit" class="btn btn-default form-control">管理员登录</button>
-            </div>
-        </form>
-
         <form action="${pageContext.request.contextPath}/user/goRegister" method="post">
             <div class="form-group">
                 <button type="submit" class="btn btn-default form-control">注册</button>

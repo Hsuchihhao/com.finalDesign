@@ -67,21 +67,33 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="${pageContext.request.contextPath}/essay/allEssay">总览 <span class="sr-only">(current)</span></a>
+                <li><a href="${pageContext.request.contextPath}/essay/allEssay">总览 <span
+                        class="sr-only">(current)</span></a>
                 </li>
-                <li><a href="${pageContext.request.contextPath}/user/allUser">用户</a></li>
-                <li><a href="${pageContext.request.contextPath}/school/allSchool">学校 <span
-                        class="sr-only">(current)</span></a></li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/user/allUser">用户</a>
+                </li>
+
+                <li>
+                    <a href="${pageContext.request.contextPath}/school/allSchool">学校
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
             </ul>
 
             <ul class="nav nav-sidebar">
                 <li>
-                    <a
-                            href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
+                    <a href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
                 </li>
-                <li><a href="">新增用户</a></li>
-                <li><a data-toggle="modal" data-target="#addSchool"
-                       id="addSchoolHref" href="">新增学校</a></li>
+
+                <li>
+                    <a href="">新增用户</a>
+                </li>
+
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/school/toAddSchool">新增学校</a>
+                </li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="">退出</a></li>

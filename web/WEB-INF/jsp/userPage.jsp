@@ -15,6 +15,7 @@
     <link href="favicon.ico" rel="shortcut icon"/>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
     <style>
         .text_slice {
             width: 100px;
@@ -24,6 +25,7 @@
             text-overflow: ellipsis;
         }
     </style>
+
     <script>
         function userCheck() {
             var flag =${checkFlag};
@@ -100,6 +102,7 @@
 </nav>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
+        <h1 class="page-header">个人主页</h1>
         <div class="media">
             <div class="media-left media-middle">
                 <a href="#">
@@ -138,6 +141,7 @@
             <li class="active"><a href="#home" data-toggle="tab">我的文章</a></li>
             <li><a href="#fcous" data-toggle="tab">我的关注</a></li>
         </ul>
+
         <div class="tab-content">
             <div class="tab-pane active" id="home">
                 <table class="table table-hover table-striped">
@@ -172,9 +176,9 @@
                     <tr>
                         <th>文章名字</th>
                         <th>文章类别</th>
-
                     </tr>
                     </thead>
+
                     <tbody>
                     <c:forEach var="follow" items="${followList}">
                         <tr>
@@ -185,6 +189,7 @@
                         </tr>
                     </c:forEach>
                     </tbody>
+
                 </table>
             </div>
         </div>

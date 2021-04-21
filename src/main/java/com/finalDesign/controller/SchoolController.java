@@ -56,29 +56,9 @@ public class SchoolController {
         school.setSchoolPic(fileNameInDB);
         System.out.println(school);
         schoolService.addSchool(school);
-        return "allSchool";
+        return "adminSchool";
     }
 
-    @ResponseBody
-    @RequestMapping("/addSchool2")
-    public String addSchool2(@RequestParam("schoolPic2") CommonsMultipartFile file, HttpServletRequest request,String schoolName,String schoolProfile) throws IOException {
-        String path = "D:\\IDEAProjects\\SchoolPicUpload";
-        System.out.println("获取的学校名字---------------"+schoolName);
-        System.out.println("获取的学校介绍---------------"+schoolProfile);
-        System.out.println("获取的学校图片路径---------------"+file);
-        String originalFilename = file.getOriginalFilename();
-        String newFileName = UUID.randomUUID() + originalFilename;
-        File targetFile = new File(path, newFileName);
-        String fileNameInDB = newFileName;
-        file.transferTo(targetFile);
-        School school=new School();
-        school.setSchoolPic(fileNameInDB);
-        school.setSchoolName(schoolName);
-        school.setSchoolProfile(schoolProfile);
-        System.out.println(school);
-        schoolService.addSchool(school);
-        return "allSchool";
-    }
 
     @RequestMapping("/addFile")
     public String addFile(@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request) throws IOException {
@@ -144,8 +124,10 @@ public class SchoolController {
             list = schoolService.queryAllSchool();
             model.addAttribute("error", "未查到");
         }
+
         model.addAttribute("list", list);
         return "allSchool";
+
     }
 
 
@@ -159,7 +141,7 @@ public class SchoolController {
         model.addAttribute("addEssayUserInfo",addEssayUserInfo);
         model.addAttribute("QSchoolId", school);
         return "addEssay";
-
     }
+
 
 }

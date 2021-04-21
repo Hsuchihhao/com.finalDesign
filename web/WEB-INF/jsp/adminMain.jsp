@@ -84,6 +84,7 @@
                 <li><a href="${pageContext.request.contextPath}/school/toAddSchool">新增学校</a></li>
             </ul>
             <ul class="nav nav-sidebar">
+                <li><a href="${pageContext.request.contextPath}/communication/toCommunication">私信</a></li>
                 <li><a href="">退出</a></li>
             </ul>
         </div>
@@ -91,26 +92,26 @@
             <h1 class="page-header">总览</h1>
             <div class="row placeholders">
                 <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                    <img src="${pageContext.request.contextPath}/statics/fourPic/wenzhangshu.jpg"
                          width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                     <h4>文章</h4>
                     <span class="text-muted">新增文章</span>
                 </div>
                 <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                    <img src="${pageContext.request.contextPath}/statics/fourPic/yonghushu.jpg"
                          width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                     <h4>用户</h4>
                     <span class="text-muted">新增用户</span>
                 </div>
                 <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                    <img src="${pageContext.request.contextPath}/statics/fourPic/xuexiaoshu.jpg"
                          width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                     <h4>学校</h4>
                     <span class="text-muted">新增学校</span>
                 </div>
 
                 <div class="col-xs-6 col-sm-3 placeholder">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                    <img src="${pageContext.request.contextPath}/statics/fourPic/pinglunshu.jpg"
                          width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
                     <h4>评论</h4>
                     <span class="text-muted">新增评论</span>

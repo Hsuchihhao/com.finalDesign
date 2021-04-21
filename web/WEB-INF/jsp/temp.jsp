@@ -11,11 +11,36 @@
     <title>Title</title>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/school/addSchool" method="post" enctype="multipart/form-data">
-    学校名字：<input type="text" name="schoolName" required><br><br><br>
-    学校图片：<input type="file" name="schoolPic2" required><br><br><br>
-    学校介绍：<input type="text" name="schoolProfile" required><br><br><br>
-    <input type="submit" value="添加">
+<form action="${pageContext.request.contextPath}/essay/updateEssay" method="post">
+    <input type="hidden" name="essayId" value="${QEssay.essayId}">
+    <input type="hidden" name="essayUserDisplayName" value="${QEssay.essayUserDisplayName}">
+    文章名字：<input type="text" class="form-control" name="essayName" required value="${QEssay.essayName}"><br><br><br>
+    文章内容：<textarea id="essayText" class="form-control" name="essayText" required class="form-control"
+                   rows="6">${QEssay.essayText}</textarea><br><br><br>
+    <div class="form-group">
+        文章作者： <label>${QEssay.essayUserDisplayName}</label>
+
+    </div>
+    文章分类：
+    <div class="dropdown" id="myDrop">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="true">
+            ${QEssay.essayCategory}
+
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="schoolul" >
+            <c:forEach var="school" items="${QSchool}">
+                <li  id="selectSchoolName">
+                    <a href="#" name="${school.schoolName}" >${school.schoolName}</a>
+                </li>
+            </c:forEach>
+
+        </ul>
+    </div>
+    <input readonly="readonly" type="hidden" name="essayCategory" id="inputEssayCategory">
+    <br><br><br>
+    <button type="submit" class="btn btn-primary">修改</button>
 </form>
 </body>
 <script type="text/javascript">
