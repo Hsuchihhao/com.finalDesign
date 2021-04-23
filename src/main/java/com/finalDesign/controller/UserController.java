@@ -77,6 +77,13 @@ public class UserController {
 
     @RequestMapping("/deleteUser/{userId}")
     public String deleteUser(@PathVariable("userId") int id) {
+
+     User user= userService.queryUserById(id);
+     List<Essay> essayList=essayService.queryEssayByDisplayName( user.getUserDisplayName());
+      for(Essay essay:essayList){
+          essay.setEssayUserDisplayName("已注销");
+          essayService.updateEssay(essay);
+      }
         userService.deleteUserById(id);
 
         return "redirect:/user/allUser";
@@ -270,6 +277,7 @@ public class UserController {
     @RequestMapping("/goOutUser")
     public String goOutUser(HttpSession session) {
         session.removeAttribute("userLoginInfo");
+        session.removeAttribute("adminLoginInfo");
         return "login";
     }
 

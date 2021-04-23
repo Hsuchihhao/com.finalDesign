@@ -9,56 +9,36 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/essay/updateEssay" method="post">
-    <input type="hidden" name="essayId" value="${QEssay.essayId}">
-    <input type="hidden" name="essayUserDisplayName" value="${QEssay.essayUserDisplayName}">
-    文章名字：<input type="text" class="form-control" name="essayName" required value="${QEssay.essayName}"><br><br><br>
-    文章内容：<textarea id="essayText" class="form-control" name="essayText" required class="form-control"
-                   rows="6">${QEssay.essayText}</textarea><br><br><br>
-    <div class="form-group">
-        文章作者： <label>${QEssay.essayUserDisplayName}</label>
+<div class="media">
 
+    <div class="media-left">
+        <img src="/resources/images/default-avatar.jpg" class="avatar img-circle" alt="">
     </div>
-    文章分类：
-    <div class="dropdown" id="myDrop">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="true">
-            ${QEssay.essayCategory}
 
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="schoolul" >
-            <c:forEach var="school" items="${QSchool}">
-                <li  id="selectSchoolName">
-                    <a href="#" name="${school.schoolName}" >${school.schoolName}</a>
-                </li>
-            </c:forEach>
+    <div class="media-body">
+        <div class="title">
+            <a href="/topic/283">的撒</a>
 
-        </ul>
+        </div>
+        <div class="tip">
+            <p class="gray">
+
+                <a href="/user/1111111">1111111</a>
+
+
+                <span>•</span>
+                <span>2021-4-1</span>
+            </p>
+        </div>
     </div>
-    <input readonly="readonly" type="hidden" name="essayCategory" id="inputEssayCategory">
-    <br><br><br>
-    <button type="submit" class="btn btn-primary">修改</button>
-</form>
+
+</div>
 </body>
 <script type="text/javascript">
-    // 获取选中的值
-    $("#schoolul li").on('click',function(){
 
-        //获取dom元素，点击哪个显示哪个
-        $("#inputEssayCategory").val($(this).text());
-
-        console.log("inputEssayCategory内容---"+ $("#inputEssayCategory").val())
-
-        //下框口变成选中字符
-        $(dropdownMenu1).text($(this).text());
-        console.log("button内容----"+$(dropdownMenu1).text());
-
-        $("#inputEssayCategory").val( $(this).children(":first").attr("name"));
-        console.log("inputEssayCategory内容---"+ $("#inputEssayCategory").val())
-
-    });
 </script>
 </html>

@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>love</title>
+    <title>注册</title>
     <link href="favicon.ico" rel="shortcut icon"/>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/statics/js/jquery-3.6.0.js"></script>
@@ -52,6 +52,7 @@
                 }
             })
         }
+
         function pwddisfcous() {
             var pwd1 = document.getElementById("password").value;
             var pwd2 = document.getElementById("password2").value;
@@ -147,8 +148,22 @@
                     >注册
                     </button>
                 </div>
+
+
             </div>
+
         </form>
+
+        <div class="modal-footer">
+
+            <form action="${pageContext.request.contextPath}/school/toMain" method="post">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default form-control">返回首页</button>
+                </div>
+            </form>
+
+        </div>
+
 
     </div>
 </div><!-- /.modal-content -->

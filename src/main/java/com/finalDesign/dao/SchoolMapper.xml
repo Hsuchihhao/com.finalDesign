@@ -22,4 +22,11 @@
         from finaldesign.school
         where schoolId =#{schoolId}
     </select>
+
+    <delete id="deleteSchoolById" parameterType="int">
+        delete
+        from finaldesign.school
+        where schoolId = #{schoolId}
+
+    </delete>
 </mapper>

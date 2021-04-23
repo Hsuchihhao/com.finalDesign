@@ -149,7 +149,7 @@
                     <tr>
 
                         <th>文章名字</th>
-                        <th>文章内容</th>
+
                         <th>发布时间</th>
 
                     </tr>
@@ -161,7 +161,7 @@
                             <td>
                                 <a href="${pageContext.request.contextPath}/essay/toEssayInner?EssayName=${essay.essayName}">${essay.essayName}</a>
                             </td>
-                            <td class="text_slice">${essay.essayText}</td>
+
                             <td><fmt:formatDate value="${essay.essayCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         </tr>
 

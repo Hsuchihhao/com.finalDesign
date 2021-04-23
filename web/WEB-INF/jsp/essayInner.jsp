@@ -57,6 +57,12 @@
                 }
             })
         }
+        function backBtn(){
+            window.history.go(-1);
+        }
+        function backBtn(){
+            window.history.go(-2);
+        }
     </script>
 
 
@@ -109,8 +115,8 @@
     </div><!-- /.container-fluid -->
 </nav>
 <ol class="breadcrumb">
-    <li><a href="#">主页</a></li>
-    <li><a href="#">论坛</a></li>
+    <li><a onclick="backBtn2()">主页</a></li>
+    <li><a onclick="backBtn()">论坛</a></li>
     <li class="active">当前</li>
 </ol>
 <!--文章部分-->
@@ -123,13 +129,14 @@
             <input type="hidden" value="${essayInner.essayCategory}" name="commentCategory" id="commentCategory">
             <h5 align="center">作者：<a name="commentDisplayName" id="commentDisplayName" href="${pageContext.request.contextPath}/user/otherUserPage?userName=${essayInner.essayUserDisplayName}">${essayInner.essayUserDisplayName}</a>
                 发布时间：${essayInner.essayCreateTime}</h5>
-            <h4>${essayInner.essayText}</h4>
-            <br>
 
             <button type="button" class="btn btn-info" onclick="toBottom()">留言</button>
 
             <button type="button" class="btn btn-success" style="float: right" id="followbtn"
                     onclick="follow()">${followInnerInfo}</button>
+            <br>
+            <h4>${essayInner.essayText}</h4>
+
 
         </div>
     </div>

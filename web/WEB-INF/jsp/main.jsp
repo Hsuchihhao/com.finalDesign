@@ -91,8 +91,9 @@
                        data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">我的信息 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ><a href="${pageContext.request.contextPath}/user/toUserPage">登录</a></li>
-
+                        <li><a href="${pageContext.request.contextPath}/user/toUserPage">个人主页</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="${pageContext.request.contextPath}/user/goOutUser">退出登录</a></li>
                     </ul>
                 </li>
             </ul>

@@ -53,6 +53,17 @@ public class CommunicationController {
         System.out.println("添加私信成功-------------");
         return "ok";
     }
+    @RequestMapping(value = "sendMassageInPage", produces = "text/html;charset=UTF-8")
+    public String sendMassageInPage(Communication communication, HttpSession session) {
+        System.out.println("查看communication---------------"+communication);
+        String nowTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        communication.setCommunicationSendName((String) session.getAttribute("userLoginInfo"));
+        communication.setCommunicationTime(Timestamp.valueOf(nowTime));
+        System.out.println("私信情况-------------------" + communication);
+        communicationService.addCommunication(communication);
+        System.out.println("添加私信成功-------------");
+        return "CommunicationIndirect";
+    }
 
     @RequestMapping("toCommunication")
     public String toCommunication(HttpSession session, Model model) {

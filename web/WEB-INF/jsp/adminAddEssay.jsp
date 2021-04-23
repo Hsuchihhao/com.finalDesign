@@ -3,6 +3,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/lang/zh-cn/zh-cn.js"></script>
 <html>
 <head>
     <meta charset="utf-8">
@@ -36,11 +39,14 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="${pageContext.request.contextPath}/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="${pageContext.request.contextPath}/ueditor/ueditor.all.min.js"></script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
-    <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8"
+            src="${pageContext.request.contextPath}/ueditor/lang/zh-cn/zh-cn.js"></script>
 
     <style>
         .text_slice {
@@ -68,10 +74,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
+
+                <li><a href="#">退出</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -84,10 +88,12 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li ><a href="${pageContext.request.contextPath}/essay/allEssay">总览 <span class="sr-only">(current)</span></a>
+                <li><a href="${pageContext.request.contextPath}/essay/allEssay">总览 <span
+                        class="sr-only">(current)</span></a>
                 </li>
                 <li><a href="${pageContext.request.contextPath}/user/allUser">用户</a></li>
-                <li><a href="${pageContext.request.contextPath}/school/allSchool">学校 <span class="sr-only">(current)</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/school/allSchool">学校 <span
+                        class="sr-only">(current)</span></a></li>
             </ul>
 
             <ul class="nav nav-sidebar">
@@ -96,9 +102,10 @@
                        id="privateChatButton" href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
                 </li>
                 <li><a href="">新增用户</a></li>
-                <li><a href="">新增学校</a></li>
+                <li><a href="${pageContext.request.contextPath}/school/toAddSchool">新增学校</a></li>
             </ul>
             <ul class="nav nav-sidebar">
+                <li><a href="${pageContext.request.contextPath}/communication/toCommunication">私信</a></li>
                 <li><a href="">退出</a></li>
             </ul>
         </div>
@@ -108,10 +115,11 @@
             <form action="${pageContext.request.contextPath}/essay/addEssay" method="post">
 
                 <input type="hidden" name="essayUserDisplayName" value="${addEssayUserInfo}">
-                文章名字：<input type="text" class="form-control" name="essayName" required ><br><br><br>
-                文章内容：<script id="editor" name="essayText" type="text/plain" style="width:1024px;height:200px;"></script>
-<%--                <textarea id="essayText" class="form-control" name="essayText" required class="form-control"--%>
-<%--                               rows="6"></textarea>--%>
+                文章名字：<input type="text" class="form-control" name="essayName" required><br><br><br>
+                文章内容：
+                <script id="editor" name="essayText" type="text/plain" style="width:1024px;height:200px;"></script>
+                <%--                <textarea id="essayText" class="form-control" name="essayText" required class="form-control"--%>
+                <%--                               rows="6"></textarea>--%>
                 <br><br><br>
                 <div class="form-group">
                     文章作者： <label>${addEssayUserInfo}</label>
@@ -119,23 +127,24 @@
                 </div>
                 文章分类：
                 <div class="dropdown" id="myDrop">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                            data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="true">
                         ${QEssay.essayCategory}
 
                         <span class="caret"></span>
                     </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="schoolul" >
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" id="schoolul">
                         <c:forEach var="school" items="${QSchool}">
-                            <li  id="selectSchoolName">
-                                <a href="#" name="${school.schoolName}" >${school.schoolName}</a>
+                            <li id="selectSchoolName">
+                                <a href="#" name="${school.schoolName}">${school.schoolName}</a>
                             </li>
                         </c:forEach>
                     </ul>
                 </div>
                 <input readonly="readonly" type="hidden" name="essayCategory" id="inputEssayCategory">
                 <br><br><br>
-                <button type="submit" class="btn btn-primary">修改</button>
+                <button type="submit" class="btn btn-primary">发布</button>
             </form>
         </div>
     </div>
@@ -155,19 +164,19 @@
 <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 <script type="text/javascript">
     // 获取选中的值
-    $("#schoolul li").on('click',function(){
+    $("#schoolul li").on('click', function () {
 
         //获取dom元素，点击哪个显示哪个
         $("#inputEssayCategory").val($(this).text());
 
-        console.log("inputEssayCategory内容---"+ $("#inputEssayCategory").val())
+        console.log("inputEssayCategory内容---" + $("#inputEssayCategory").val())
 
         //下框口变成选中字符
         $(dropdownMenu1).text($(this).text());
-        console.log("button内容----"+$(dropdownMenu1).text());
+        console.log("button内容----" + $(dropdownMenu1).text());
 
-        $("#inputEssayCategory").val( $(this).children(":first").attr("name"));
-        console.log("inputEssayCategory内容---"+ $("#inputEssayCategory").val())
+        $("#inputEssayCategory").val($(this).children(":first").attr("name"));
+        console.log("inputEssayCategory内容---" + $("#inputEssayCategory").val())
 
     });
 </script>

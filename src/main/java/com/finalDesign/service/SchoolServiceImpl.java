@@ -40,4 +40,9 @@ public class SchoolServiceImpl  implements SchoolService{
         return schoolMapper.querySchoolById(id);
     }
 
+    @Override
+    public int deleteSchoolById(int id) {
+        return schoolMapper.deleteSchoolById(id);
+    }
+
 }

@@ -45,6 +45,7 @@
 
         }
     </style>
+
 </head>
 
 <body>
@@ -63,10 +64,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
+
+                <li><a href="#">退出</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -90,10 +89,11 @@
                        id="privateChatButton" href="${pageContext.request.contextPath}/essay/toAdminAddEssay">新增文章</a>
                 </li>
                 <li><a href="">新增用户</a></li>
-                <li><a href="">新增学校</a></li>
+                <li><a href="${pageContext.request.contextPath}/school/toAddSchool">新增学校</a></li>
             </ul>
 
             <ul class="nav nav-sidebar">
+                <li><a href="${pageContext.request.contextPath}/communication/toCommunication">私信</a></li>
                 <li><a href="">退出</a></li>
             </ul>
 
@@ -150,9 +150,19 @@
                             <td>${school.schoolProfile}</td>
                             <td>${school.schoolNumber}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/user/toUpdateUser?id=${user.userId}">修改</a>
+                                <form action="${pageContext.request.contextPath}/user/toUpdateUser?id=${user.userId}" method="post">
+                                    <button type="submit" class="btn btn-warning">修改</button>
+                                </form>
+                                    <%--                                <a href="${pageContext.request.contextPath}/essay/toUpdateEssay?id=${essay.essayId}">修改</a>--%>
                                 &nbsp;&nbsp;
-                                <a href="${pageContext.request.contextPath}/user/deleteUser/${user.userId}">删除</a>
+                                <form action="${pageContext.request.contextPath}/school/deleteSchool/${school.schoolId}">
+
+                                    <button type="submit" class="btn btn-danger">删除</button>
+                                </form>
+
+                               <%-- <a href="${pageContext.request.contextPath}/user/toUpdateUser?id=${user.userId}">修改</a>
+                                &nbsp;&nbsp;
+                                <a href="${pageContext.request.contextPath}/school/deleteSchool/${school.schoolId}">删除</a>--%>
                             </td>
                         </tr>
                     </c:forEach>

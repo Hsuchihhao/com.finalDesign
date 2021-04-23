@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -111,7 +112,7 @@ public class SchoolController {
 
         System.out.println("全部文章" + essayList);
 
-        return "forum";//
+        return "forum2";//
     }
 
     //根据名字查学校
@@ -143,5 +144,18 @@ public class SchoolController {
         return "addEssay";
     }
 
+    @RequestMapping("/deleteSchool/{schoolId}")
+    public String deleteUser(@PathVariable("schoolId") int id) {
+
+
+        School school=schoolService.querySchoolById(id);
+        List<Essay> essayList=  essayService.queryEssayByCategory(school.getSchoolName());
+        for(Essay essay:essayList){
+            essayService.deleteEssayById(essay.getEssayId());
+        }
+       schoolService.deleteSchoolById(id);
+
+        return "redirect:/school/allSchool";
+    }
 
 }

@@ -15,4 +15,6 @@ public interface SchoolMapper {
     School querySchoolByName(@Param("schoolName") String schoolName);
 
     School querySchoolById(int id);
+
+    int deleteSchoolById(@Param("schoolId") int id);
 }

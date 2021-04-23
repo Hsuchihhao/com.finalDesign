@@ -15,13 +15,13 @@
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="${pageContext.request.contextPath}/statics/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <style>
-        .inTer{
-            width:100%;
-            height:70%;
-            border:1px solid #000000;
-            margin:0 auto;
-            margin-top:10px;
-            overflow-y:auto;
+        .inTer {
+            width: 100%;
+            height: 70%;
+            border: 1px solid #000000;
+            margin: 0 auto;
+            margin-top: 10px;
+            overflow-y: auto;
         }
     </style>
     <script>
@@ -29,63 +29,67 @@
         //
         // })
         var p = document.getElementsByTagName("p");
-        var commTime=document.getElementsByTagName("commTime");
+        var commTime = document.getElementsByTagName("commTime");
+
         function displayCommunication(thisName) {
             $("#father").empty();
-            console.log("thisName-----------------------"+thisName);
+            console.log("thisName-----------------------" + thisName);
             $.get({
                 url: "${pageContext.request.contextPath}/communication/displayCommunication",
-                data: {"userName":$(thisName).text()},
-                datatype:"json",
+                data: {"userName": $(thisName).text()},
+                datatype: "json",
                 success: function (data) {
-                    console.log(data+"data-----------------------------");
-                    var jsonList= JSON.parse(data);
-                    var commDisplayTextString="";
-                    var myCommDisplayTextString=""
+                    console.log(data + "data-----------------------------");
+                    var jsonList = JSON.parse(data);
+                    var commDisplayTextString = "";
+                    var myCommDisplayTextString = ""
                     var br = document.createElement("br");
-                    for(var i=0;i<jsonList.length;i++){
-                        if(jsonList[i].communicationSendName== $("#displayName").text()){
-                            commDisplayTextString=commDisplayTextString+"\n"+jsonList[i].communicationText;
+                    $("#inputReceiver").val($("#displayName").text());
+                    console.log("input的值---------------------" + $("#displayName").text());
+                    for (var i = 0; i < jsonList.length; i++) {
+                        if (jsonList[i].communicationSendName == $("#displayName").text()) {
+                            commDisplayTextString = commDisplayTextString + "\n" + jsonList[i].communicationText;
                             //timeSon为发送时间
                             //每次循环时都要新创建一个Element
+
                             var timeSon = document.createElement("p");
-                            timeSon.align="center";
-                            timeSon.style.marginRight="5px";
-                            timeSon.innerText=jsonList[i].communicationTime;
+                            timeSon.align = "center";
+                            timeSon.style.marginRight = "5px";
+                            timeSon.innerText = jsonList[i].communicationTime;
                             father.appendChild(timeSon);
                             father.appendChild(document.createElement("br"));
                             timeSon.scrollIntoView();
                             //timeSon为发送的内容
                             var son = document.createElement("p");
-                            son.style.clear="both";
-                            son.style.float="left";
-                            son.style.marginRight="5px";
-                            son.innerText=jsonList[i].communicationText;
+                            son.style.clear = "both";
+                            son.style.float = "left";
+                            son.style.marginRight = "5px";
+                            son.innerText = jsonList[i].communicationText;
                             father.appendChild(son);
                             //如果添加的孩子是不变的，那么将不会添加新的，而是会移动他
                             father.appendChild(document.createElement("br"));
                             father.appendChild(document.createElement("br"));
                             son.scrollIntoView();
-                            console.log("发送私信第"+i+"个------")
+                            console.log("发送私信第" + i + "个------")
 
-                        }else {
-                            myCommDisplayTextString=myCommDisplayTextString+"\n"+jsonList[i].communicationText;
+                        } else {
+                            myCommDisplayTextString = myCommDisplayTextString + "\n" + jsonList[i].communicationText;
 
                             var timeSon = document.createElement("p");
 
-                            timeSon.align="center";
-                            timeSon.style.display="block";
-                            timeSon.style.marginRight="5px";
-                            timeSon.innerText=jsonList[i].communicationTime;
+                            timeSon.align = "center";
+                            timeSon.style.display = "block";
+                            timeSon.style.marginRight = "5px";
+                            timeSon.innerText = jsonList[i].communicationTime;
                             father.appendChild(timeSon);
                             father.appendChild(document.createElement("br"));
                             timeSon.scrollIntoView();
 
                             var son = document.createElement("p");
-                            son.style.clear="both";
-                            son.style.float="right";
-                            son.style.marginRight="5px";
-                            son.innerText=jsonList[i].communicationText;
+                            son.style.clear = "both";
+                            son.style.float = "right";
+                            son.style.marginRight = "5px";
+                            son.innerText = jsonList[i].communicationText;
                             father.appendChild(son);
                             father.appendChild(document.createElement("br"));
                             father.appendChild(document.createElement("br"));
@@ -93,7 +97,7 @@
 
                         }
 
-                        $("#commDisplayText").text(commDisplayTextString+"------"+myCommDisplayTextString)
+                        $("#commDisplayText").text(commDisplayTextString + "------" + myCommDisplayTextString)
                     }
                     console.log(commDisplayTextString);
                     console.log("-----------------------------")
@@ -116,7 +120,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">论坛</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/school/toMain">论坛</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -139,11 +143,9 @@
                        data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">我的信息 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/toUserPage">个人主页</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="${pageContext.request.contextPath}/user/goOutUser">退出登录</a></li>
                     </ul>
                 </li>
             </ul>
@@ -168,10 +170,13 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <c:forEach var="communicationName" items="${communicationNameList}">
-                                              <td><button onclick="displayCommunication(this)" class="btn btn-primary" type="button" id="displayName">${communicationName}</button></td>
-                                            </tr>
+                                        <tr>
+                                            <c:forEach var="communicationName" items="${communicationNameList}">
+                                            <td>
+                                                <button onclick="displayCommunication(this)" class="btn btn-primary"
+                                                        type="button" id="displayName">${communicationName}</button>
+                                            </td>
+                                        </tr>
                                         </c:forEach>
                                         </tbody>
                                     </table>
@@ -182,10 +187,17 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="inTer" id="father">
-                            </div>
-                            <textarea class="form-control" rows="4"></textarea>
 
-                            <button class="btn btn-primary" type="button" style="float: right">回复</button>
+                            </div>
+                            <form action="${pageContext.request.contextPath}/communication/sendMassageInPage"
+                                  method="post">
+
+                                <input type="hidden" id="inputReceiver" name="communicationReceiverName" value="">
+
+                                <textarea class="form-control" rows="4" name="communicationText"></textarea>
+
+                                <button class="btn btn-primary" type="submit" style="float: right">回复</button>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -29,7 +29,6 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-
         }
     </style>
     <script>
@@ -51,10 +50,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Settings</a></li>
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Help</a></li>
+
+                <li><a href="${pageContext.request.contextPath}/user/goOutUser">退出</a></li>
             </ul>
             <form class="navbar-form navbar-right">
                 <input type="text" class="form-control" placeholder="Search...">
@@ -126,7 +123,7 @@
                     <tr>
                         <th>文章编号</th>
                         <th>文章名字</th>
-                        <th>文章内容</th>
+<%--                        <th>文章内容</th>--%>
                         <th>文章作者</th>
                         <th>文章类别</th>
                         <th>发布时间</th>
@@ -137,14 +134,22 @@
                         <tr>
                             <td>${essay.essayId}</td>
                             <td>${essay.essayName}</td>
-                            <td class="text_slice">${essay.essayText}</td>
+<%--                            <td class="text_slice">${essay.essayText}</td>--%>
                             <td>${essay.essayUserDisplayName}</td>
                             <td>${essay.essayCategory}</td>
                             <td><fmt:formatDate value="${essay.essayCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/essay/toUpdateEssay?id=${essay.essayId}">修改</a>
+                                <form action="${pageContext.request.contextPath}/essay/toUpdateEssay?id=${essay.essayId}" method="post">
+                                <button type="submit" class="btn btn-warning">修改</button>
+                                </form>
+<%--                                <a href="${pageContext.request.contextPath}/essay/toUpdateEssay?id=${essay.essayId}">修改</a>--%>
                                 &nbsp;&nbsp;
-                                <a href="${pageContext.request.contextPath}/essay/deleteEssay/${essay.essayId}">删除</a>
+                                <form action="${pageContext.request.contextPath}/essay/deleteEssay/${essay.essayId}">
+
+                                    <button type="submit" class="btn btn-danger">删除</button>
+                                </form>
+
+<%--                                <a href="${pageContext.request.contextPath}/essay/deleteEssay/${essay.essayId}">删除</a>--%>
                             </td>
                         </tr>
                     </c:forEach>

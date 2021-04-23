@@ -14,4 +14,6 @@ public interface SchoolService {
     School querySchoolByName(String schoolName);
 
     School querySchoolById(int id);
+
+    int deleteSchoolById( int id);
 }
